@@ -9,8 +9,8 @@ class L1Dino extends Things{
   }
   
   void love(int amount, int level){
-  childDinos = new L1Dino[amount];
-  for (int i=0; i < childDinos.length; i++) {
+  dinos = new L1Dino[amount];
+  for (int i=0; i < dinos.length; i++) {
     
     }
   
@@ -18,9 +18,9 @@ class L1Dino extends Things{
   
   void show() {
   pushMatrix();
-  if (childDinos != null) {
-    for (int i = 0; i < childDinos.length; i++) {
-      childDinos[i].show();
+  if (dinos != null) {
+    for (int i = 0; i < dinos.length; i++) {
+      dinos[i].show();
     }
   }
   

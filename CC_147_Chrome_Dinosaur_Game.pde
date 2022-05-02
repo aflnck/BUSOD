@@ -5,11 +5,9 @@ Playground playground;
 
 Meteorite met;
 PImage MetImg;
-  
+
 Falcon1 rocket1;
 PImage Fal1Img;
-
-//copied code
 Unicorn unicorn;
 PImage uImg;
 PImage tImg;
@@ -27,29 +25,25 @@ void mousePressed() {
 void setup() {
   size(800, 450);
   playground = new Playground();
-  //pic initialisation 
+  //pic initialisation
   uImg = loadImage("unicorn.png");
   tImg = loadImage("train.png");
   bImg = loadImage("background.jpg");
   Fal1Img = loadImage("Fal1.jpg");
-  L1DinoImg = loadImage("L1Dino.jpg");
-  
-  for (int i = 0; i < 10; i++){
-    
+  L1DinoImg = loadImage("unicorn.png");
+
+  for (int i = 0; i < 10; i++) {
   }
-  
+
   unicorn = new Unicorn();
-  partCollection.partSetup(6,0);
+  partCollection.partSetup(6, 0);
 }
 
 
 void keyPressed() {
   if (key == 'w') {
-    Things.move();
-  }
-  else if(key == 's'){
-  
-  
+    //Things.move();
+  } else if (key == 's') {
   }
 }
 

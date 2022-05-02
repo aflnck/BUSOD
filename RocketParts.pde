@@ -1,21 +1,12 @@
 class RocketParts extends Things{
-  int L1DposX, L1DposY;
-  RocketParts[] rocketParts;
-  
-  RocketParts() {
-  
+  int RPposX, RPposY;
+  PImage partPicture;
+  RocketParts(String picture, int posX, int posY) {
+      this.partPicture = loadImage(picture);
+      this.RPposX = posX;
+      this.RPposY = posY;
   }
-  
-
-  
-  void show() {
-  pushMatrix();
-  if (rocketParts != null) {
-    for (int i = 0; i < rocketParts.length; i++) {
-      rocketParts[i].show();
-    }
-  }
-  
-  }
-  
+   void show(){
+      image(this.partPicture, this.RPposX, this.RPposY, 50, 50);
+   }
 }

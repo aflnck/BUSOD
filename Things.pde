@@ -1,10 +1,16 @@
 class Things {
-  ArrayList<RocketParts> rocketParts = new ArrayList<RocketParts>();
+boolean isSelected;
   
   
-  void hits(int posX, int posY, int posX2, int posY2){
+  void bumpInto(int posX, int posY, int posX2, int posY2){
 
   
+}
+void select(){
+  isSelected = true;
+}
+void unselect(){
+  isSelected = false;
 }
 
 void move(){

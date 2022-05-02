@@ -1,24 +1,18 @@
-class Parts extends Things{
+class RocketParts extends Things{
   int L1DposX, L1DposY;
-  Parts[] parts;
+  RocketParts[] rocketParts;
   
-  Parts() {
-  
-  }
-  
-  void partSetup(int amount, int level){
-  parts = new Parts[amount];
-  for (int i=0; i < parts.length; i++) {
-    
-    }
+  RocketParts() {
   
   }
+  
+
   
   void show() {
   pushMatrix();
-  if (parts != null) {
-    for (int i = 0; i < parts.length; i++) {
-      parts[i].show();
+  if (rocketParts != null) {
+    for (int i = 0; i < rocketParts.length; i++) {
+      rocketParts[i].show();
     }
   }
   

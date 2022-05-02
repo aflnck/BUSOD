@@ -1,5 +1,5 @@
 class Things {
-  
+  ArrayList<RocketParts> rocketParts = new ArrayList<RocketParts>();
   
   
   void hits(int posX, int posY, int posX2, int posY2){

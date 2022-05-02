@@ -13,13 +13,10 @@ PImage uImg;
 PImage tImg;
 PImage bImg;
 ArrayList<Train> trains = new ArrayList<Train>();
-
-
 PImage L1DinoImg;
-RocketParts partCollection;
+
 
 void mousePressed() {
-  //trains.add(new Train());
 }
 
 void setup() {
@@ -32,12 +29,9 @@ void setup() {
   Fal1Img = loadImage("Fal1.jpg");
   L1DinoImg = loadImage("unicorn.png");
 
-  for (int i = 0; i < 10; i++) {
-  }
-
   unicorn = new Unicorn();
+  playground.partSetup(6);
 
-  //partCollection.partSetup(6, 0);
 }
 
 
@@ -54,7 +48,7 @@ void draw() {
     trains.add(new Train());
   }
 
-  background(bImg);
+  //background(bImg);
   for (Train t : trains) {
     t.move();
     t.show();
@@ -66,4 +60,5 @@ void draw() {
 
   unicorn.show();
   unicorn.move();
+  playground.showRocketParts();
 }

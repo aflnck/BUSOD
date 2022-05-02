@@ -1,20 +1,30 @@
 class Playground {
   int Fal1X, Fal1Y, Fal1Size;
-  ArrayList<RocketParts> rocketParts = new ArrayList<RocketParts>();
+  public ArrayList<RocketParts> rocketParts = new ArrayList<RocketParts>();
   
   
   Playground(){
-  
   }
   
   
   //create RocketParts:
   void partSetup(int amount, int level){
-  parts = new Parts[amount];
-  for (int i=0; i < parts.length; i++) {
+
+  for (int i=0; i < rocketParts.size(); i++) {
     
     }
   
+  }
+  
+  
+  
+    void showRocketParts() {
+
+  if (rocketParts != null) {
+  for (int i=0; i < rocketParts.size(); i++) {
+    
+    }
+    }
   }
 
   

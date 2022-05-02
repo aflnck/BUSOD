@@ -14,9 +14,9 @@ PImage tImg;
 PImage bImg;
 ArrayList<Train> trains = new ArrayList<Train>();
 
-//ArrayList<L1Dino> dinos = new ArrayList<L1Dino>();
+
 PImage L1DinoImg;
-Parts partCollection;
+RocketParts partCollection;
 
 void mousePressed() {
   //trains.add(new Train());
@@ -36,7 +36,8 @@ void setup() {
   }
 
   unicorn = new Unicorn();
-  partCollection.partSetup(6, 0);
+
+  //partCollection.partSetup(6, 0);
 }
 
 

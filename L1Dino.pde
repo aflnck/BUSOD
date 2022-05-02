@@ -1,4 +1,4 @@
-class L1Dino {
+class L1Dino extends Things{
   String skill;
   int age;
   int L1DposX, L1DposY;

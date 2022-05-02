@@ -1,6 +1,8 @@
 //var decl.
 int currentYear;
 
+Playground playground;
+
 Meteorite met;
 PImage MetImg;
   
@@ -16,14 +18,16 @@ ArrayList<Train> trains = new ArrayList<Train>();
 
 //ArrayList<L1Dino> dinos = new ArrayList<L1Dino>();
 PImage L1DinoImg;
+Parts partCollection;
 
 void mousePressed() {
-  trains.add(new Train());
+  //trains.add(new Train());
 }
 
 void setup() {
   size(800, 450);
-  //pic initialisation
+  playground = new Playground();
+  //pic initialisation 
   uImg = loadImage("unicorn.png");
   tImg = loadImage("train.png");
   bImg = loadImage("background.jpg");
@@ -35,12 +39,17 @@ void setup() {
   }
   
   unicorn = new Unicorn();
+  partCollection.partSetup(6,0);
 }
 
 
 void keyPressed() {
-  if (key == ' ') {
-    unicorn.jump();
+  if (key == 'w') {
+    Things.move();
+  }
+  else if(key == 's'){
+  
+  
   }
 }
 

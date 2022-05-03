@@ -1,7 +1,7 @@
 class L1Dino extends Things{
   String skill;
   int age;
-  int L1DposX, L1DposY;
+
   L1Dino[] dinos;
   
   L1Dino() {

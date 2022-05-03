@@ -1,5 +1,11 @@
 class Meteorite extends Things{
-  int MetX, MetY, MetSize;
+int metSize;
+PImage rocketPicture;
+
+  Meteorite(int metSize){
+    this.metSize = metSize;
+  }
+
 
   
 }

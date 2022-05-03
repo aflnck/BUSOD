@@ -1,5 +1,14 @@
 class Rocket extends Things{
-  int Fal1X, Fal1Y, Fal1Size;
+  int Rsize;
+    PImage rocketPicture;
 
   
+  Rocket(String picture, int RposX, int RposY) {
+      this.rocketPicture = loadImage(picture);
+      this.posX = RposX;
+      this.posY = RposY;
+  }
+   void show(){
+      image(this.rocketPicture, this.posX, this.posY, 50, 50);
+   }
 }

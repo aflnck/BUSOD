@@ -1,52 +1,59 @@
-// Daniel Shiffman
-// https://thecodingtrain.com/CodingChallenges/147-chrome-dinosaur.html
-// https://youtu.be/l0HoJHc-63Q
+//things to check out: textAlign(CENTER);, rectMode(CENTER);
 
-// Google Chrome Dinosaur Game (Unicorn, run!)
-// https://editor.p5js.org/codingtrain/sketches/v3thq2uhk
+int currentYear = -245; //in million years. timespan until -66 years.
+  //Non-bird dinosaurs lived between about 245 and 66 million years ago,  
+  //in a time known as the Mesozoic Era. This was many millions of years
+  //before the first modern humans, Homo sapiens, appeared.
 
-Unicorn unicorn;
-PImage uImg;
-PImage tImg;
-PImage bImg;
-ArrayList<Train> trains = new ArrayList<Train>();
+int gameStage = 0;
 
+Playground playground;
+Meteorite met;
+Rocket rocket1;
+Controls con;
+OperationCenter oc1;
 
-void mousePressed() {
-  trains.add(new Train());
+void settings() {
+  size(800, 450);
 }
 
 void setup() {
-  size(800, 450);
-  uImg = loadImage("unicorn.png");
-  tImg = loadImage("train.png");
-  bImg = loadImage("background.jpg");
-  unicorn = new Unicorn();
-}
+  playground = new Playground();
+  con = new Controls();
+  oc1 = new OperationCenter();
 
-
-void keyPressed() {
-  if (key == ' ') {
-    unicorn.jump();
-  }
+  //add initial objects:
+  playground.rocketPartSetup(1);
+  playground.createInitialDinos();
+  oc1.createRockets(5);
+  playground.addMeteorite(5);
 }
 
 void draw() {
+  //do a new background, depending on how far the game is.
+  playground.updateBackground();
 
-  if (random(1) < 0.005) {
-    trains.add(new Train());
+  //add meteorites sometimes, at random, during the game.
+  if (random(1) < 0.001) {
+    playground.addMeteorite(1);
   }
 
-  background(bImg);
-  for (Train t : trains) {
-    t.move();
-    t.show();
-    if (unicorn.hits(t)) {
-      print("game over");
-      noLoop();
-    }
-  }
+  playground.showRocketParts();
+  playground.showDinos();
+  oc1.showRockets();
+  playground.showMeteorites();
+  playground.fallMeteorites();
+  playground.highlightSelectedObj();
+}
 
-  unicorn.show();
-  unicorn.move();
+//redirected functions for interaction -> class Controls.
+void mousePressed() {
+  con.mouseP();
+}
+
+  //move the selected obj. into the desired direction.
+void keyPressed() {
+  if (key == CODED) {
+    con.keyP(key);
+  }
 }

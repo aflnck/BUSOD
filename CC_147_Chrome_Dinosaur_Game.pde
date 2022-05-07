@@ -1,69 +1,60 @@
-//var decl.
-int currentYear;
+
+//things to check out: textAlign(CENTER);, rectMode(CENTER);
+
+int currentYear = -245; //in million years. timespan until -66 years.
+  //Non-bird dinosaurs lived between about 245 and 66 million years ago,  
+  //in a time known as the Mesozoic Era. This was many millions of years
+  //before the first modern humans, Homo sapiens, appeared.
+
+int gameStage = 0;
 
 Playground playground;
-
 Meteorite met;
-PImage MetImg;
+Rocket rocket1;
+Controls con;
+OperationCenter oc1;
 
-Falcon1 rocket1;
-PImage Fal1Img;
-Unicorn unicorn;
-PImage uImg;
-PImage tImg;
-PImage bImg;
-ArrayList<Train> trains = new ArrayList<Train>();
-
-
-PImage L1DinoImg;
-RocketParts partCollection;
-
-void mousePressed() {
-  //trains.add(new Train());
+void settings() {
+  size(800, 450);
 }
 
 void setup() {
-  size(800, 450);
   playground = new Playground();
-  //pic initialisation
-  uImg = loadImage("unicorn.png");
-  tImg = loadImage("train.png");
-  bImg = loadImage("background.jpg");
-  Fal1Img = loadImage("Fal1.jpg");
-  L1DinoImg = loadImage("unicorn.png");
+  con = new Controls();
+  oc1 = new OperationCenter();
 
-  for (int i = 0; i < 10; i++) {
-  }
-
-  unicorn = new Unicorn();
-
-  //partCollection.partSetup(6, 0);
-}
-
-
-void keyPressed() {
-  if (key == 'w') {
-    //Things.move();
-  } else if (key == 's') {
-  }
+  //add initial objects:
+  playground.rocketPartSetup(1);
+  playground.createInitialDinos();
+  oc1.createRockets(5);
+  playground.addMeteorite(5);
 }
 
 void draw() {
+  //do a new background, depending on how far the game is.
+  playground.updateBackground();
 
-  if (random(1) < 0.005) {
-    trains.add(new Train());
+  //add meteorites sometimes, at random, during the game.
+  if (random(1) < 0.001) {
+    playground.addMeteorite(1);
   }
 
-  background(bImg);
-  for (Train t : trains) {
-    t.move();
-    t.show();
-    if (unicorn.hits(t)) {
-      print("game over");
-      noLoop();
-    }
-  }
+  playground.showRocketParts();
+  playground.showDinos();
+  oc1.showRockets();
+  playground.showMeteorites();
+  playground.fallMeteorites();
+  playground.highlightSelectedObj();
+}
 
-  unicorn.show();
-  unicorn.move();
+//redirected functions for interaction -> class Controls.
+void mousePressed() {
+  con.mouseP();
+}
+
+  //move the selected obj. into the desired direction.
+void keyPressed() {
+  if (key == CODED) {
+    con.keyP(key);
+  }
 }

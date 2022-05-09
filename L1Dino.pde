@@ -3,16 +3,16 @@ class L1Dino extends Things{
   //L1Dino[] dinos;
   //String skill;
   
-  PImage dinoPicture;
-  int age;
-  int colorR;
-  int colorG;
-  int colorB;
-  int generation;
+  private PImage dinoPicture;
+  private int age  = 0;
+  private int colorR;
+  private int colorG;
+  private int colorB;
+  private int generation;
   
   //constructor!
   L1Dino(String picture, int DposX, int DposY, int r, int g, int b, int dinoGeneration) {
-  this.age = 0;
+  //this.age = 0;
   this.dinoPicture = loadImage(picture);
   this.posX = DposX;
   this.posY = DposY;
@@ -31,6 +31,7 @@ class L1Dino extends Things{
   
   void jump(){
       this.posY = -35;
+
       //set back +35 after 0.2 "gameyears" later..?
   }
   
@@ -43,10 +44,10 @@ class L1Dino extends Things{
     return this.colorR;
   }
   int getColorG(){
-    return this.colorR;
+    return this.colorG;
   }
   int getColorB(){
-    return this.colorR;
+    return this.colorB;
   }
 
 }

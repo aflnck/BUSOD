@@ -33,6 +33,7 @@ void setup() {
 void draw() {
   //do a new background, depending on how far the game is.
   playground.updateBackground();
+  oc1.showOC();
 
   //add meteorites sometimes, at random, during the game.
   if (random(1) < 0.001) {
@@ -54,7 +55,7 @@ void mousePressed() {
 
   //move the selected obj. into the desired direction.
 void keyPressed() {
-  if (key == CODED) {
-    con.keyP(key);
-  }
+  //if (key == CODED) {
+    con.keyP();
+  //}
 }

@@ -8,7 +8,7 @@ void mouseP() {
     // -> selectedObject: 0 is for Dino, 1 is for Rocket.  
 }
   
-  void keyP(char key) {
+  void keyP() {
     if (keyCode == RIGHT && true) {
     playground.moveRight();
     } else if (keyCode == UP && true) {

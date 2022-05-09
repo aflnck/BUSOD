@@ -5,6 +5,13 @@ class OperationCenter {
   //shows how much fuel there` left in the current rocket
   //maybe shows a "cockpit" with rocketAngle or stuff like this.
 
+OperationCenter(){
+
+}
+  void showOC(){
+    fill(100);
+    rect(350,320,180,30);
+  }
   boolean rocketReady() {
     //returns boolean if rocket is ready (flying, or ready at start base) or not.
     return true;

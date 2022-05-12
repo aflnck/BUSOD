@@ -14,14 +14,17 @@ Rocket rocket1;
 Controls con;
 OperationCenter oc1;
 
+
 void settings() {
-  size(800, 450);
+  size(800, 600);
 }
 
 void setup() {
   playground = new Playground();
   con = new Controls();
   oc1 = new OperationCenter();
+  noStroke();
+  
 
   //add initial objects:
   playground.rocketPartSetup(1);
@@ -32,8 +35,9 @@ void setup() {
 
 void draw() {
   //do a new background, depending on how far the game is.
-  playground.updateBackground();
-  oc1.showOC();
+
+    playground.drawB();
+    oc1.showOC();
 
   //add meteorites sometimes, at random, during the game.
   if (random(1) < 0.001) {

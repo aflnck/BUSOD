@@ -6,7 +6,6 @@ class OperationCenter {
   //maybe shows a "cockpit" with rocketAngle or stuff like this.
 
 OperationCenter(){
-
 }
   void showOC(){
     fill(100);

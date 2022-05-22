@@ -10,7 +10,7 @@ class Playground {
 
   //constructor!
   Playground() {
-    backgroundImg = loadImage("background.jpg");
+    //backgroundImg = loadImage("background.jpg");
   }
 
 color green =  #63E06B;
@@ -162,41 +162,11 @@ int x10 = 800;
     }
   }
 
-  //check what element of the lists got selected:
-  void checkThingLocation(int mousePosX, int mousePosY) {
-    //check if selected is a Dino & what dino it exactly is:
-    if (dinoList != null) {
-      for (int i=0; i < dinoList.size(); i++) {
-        int dinoX = dinoList.get(i).getPosX();
-        int dinoY = dinoList.get(i).getPosY();
-        if (dinoX < mousePosX && dinoX + 80 > mousePosX && // TODO: extract this function into the things class!
-          dinoY < mousePosY && dinoY + 50 > mousePosY) { // TORESEARCH: colourpicker in mouseLocation to determine
-          //the if dino is clicked or if on background.
-          selectedObject = 0; // 0 is for Dino!
-          selectedObjID = i; // which rocket (in arrayList) is it?
-        }
-      }
-    }
-    //check if selected is a Rocket & what rocket it exactly is: (can only select the last rocket:)
-    if (rocketList != null) {
-      int rocketX = rocketList.get(rocketList.size()-1).getPosX();
-      int rocketY = rocketList.get(rocketList.size()-1).getPosY();
-      if (rocketX < mousePosX && rocketX + 50 > mousePosX &&
-        rocketY < mousePosY && rocketY + 50 > mousePosY) {
-        print("issa Rocket, "+rocketX + " " + rocketY + " ");
-        selectedObject = 1; // 1 is for Rocket!
-        selectedObjID = rocketList.size()-1; // which rocket (in arrayList) is it?
-      }
-    }
-  }
-  
+
   void moveDinosRandomly(int r){
     //print("  -  "+r);
       //if (selectedObject != 0 || (selectedObjID != dinoList.get(r).getID() && selectedObject == i)){ //if its not a dino, or if its a dino & not the currently selectedDino, then:
       dinoList.get(r).moveRandomly(); // should add speed to move dinos with speed variable over continious cycles.
-      
-    
-        
       //}
   }
   
@@ -226,26 +196,6 @@ int x10 = 800;
       dinoList.get(selectedObjID).move(0, 2);
     } else if (selectedObject == 1 && oc1.rocketReady()) {
       rocketList.get(selectedObjID).move(0, 2);
-    }
-  }
-
-  void highlightSelectedObj() {
-    if (selectedObject != 10) {
-      int objectX = 0;
-      int objectY = 0;
-      if (selectedObject == 0) { //if its a dino!
-        objectX = dinoList.get(selectedObjID).getPosX();
-        objectY = dinoList.get(selectedObjID).getPosY();
-      } else if (selectedObject == 1) { // if it` a Rocket
-        objectX = rocketList.get(selectedObjID).getPosX();
-        objectY = rocketList.get(selectedObjID).getPosY();
-      }
-      stroke(255, 103, 111);
-      strokeWeight(6);
-      fill(0, 0);
-
-      //TODO if selectedObject == 0){ make it 80x50, else as big as a rocket.}
-      rect(objectX, objectY, 52, 52);
     }
   }
   

@@ -3,7 +3,7 @@ class Controls{
   //if anyone knows, how to make this class static without breaking everything, that would be an improvement.
   
 void mouseP() {
-    playground.checkThingLocation(mouseX, mouseY);
+    //playground.checkThingLocation(mouseX, mouseY); -> THIS IS NOT USED ANYMORE; CAN BE USED TODO WHATEVER IF MOUSE PRESSED.
     // this function sets both int "selectedObjID" and int "checkDinoLocation".
     // -> selectedObject: 0 is for Dino, 1 is for Rocket.  
 }

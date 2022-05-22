@@ -41,11 +41,13 @@ void draw() {
   }
 
   playground.showRocketParts();
+  playground.moveDinosRandomly(int(random(playground.getDinoListSize())));
   playground.showDinos();
   oc1.showRockets();
   playground.showMeteorites();
   playground.fallMeteorites();
   playground.highlightSelectedObj();
+  
 }
 
 //redirected functions for interaction -> class Controls.

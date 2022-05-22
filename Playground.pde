@@ -114,6 +114,17 @@ class Playground {
       }
     }
   }
+  
+  void moveDinosRandomly(int r){
+    //print("  -  "+r);
+      //if (selectedObject != 0 || (selectedObjID != dinoList.get(r).getID() && selectedObject == i)){ //if its not a dino, or if its a dino & not the currently selectedDino, then:
+      dinoList.get(r).moveRandomly(); // should add speed to move dinos with speed variable over continious cycles.
+      
+    
+        
+      //}
+  }
+  
   void moveRight() {
     if (selectedObject == 0) {
       dinoList.get(selectedObjID).move(2, 0);
@@ -161,6 +172,11 @@ class Playground {
       //TODO if selectedObject == 0){ make it 80x50, else as big as a rocket.}
       rect(objectX, objectY, 52, 52);
     }
+  }
+  
+  //getters & setters:
+  int getDinoListSize(){
+  return dinoList.size();
   }
 }
 //there is exactly no missing curly bracket here, besides processing saying it would be.

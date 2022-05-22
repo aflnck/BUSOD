@@ -4,7 +4,6 @@ class Rocket extends Things{
   int fuel;
   boolean rocketStartable;
 
-  
   Rocket(String picture, int RposX, int RposY) {
       this.rocketPicture = loadImage(picture);
       this.posX = RposX;

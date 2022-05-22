@@ -91,7 +91,7 @@ class L1Dino extends Things {
       image(this.dinoPicture, this.posX, this.posY, 80, 50);  //else, to the right.
     }
   }
-  
+
   //getter / setter methods:
   int getColorR() {
     return this.colorR;

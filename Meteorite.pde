@@ -2,39 +2,55 @@ class Meteorite extends Things{
 
 int metSize;
 float metSpeedX;
-float metSpeedY; //basically gravity & size
+float metSpeedY; 
 PImage metPicture;
 
 //meteorites falling down 
   Meteorite(int metSize, int posX, int posY){
     this.metSize = metSize;
-    this.metPicture = loadImage("meteorite.jpg");
     this.posX = posX;
     this.posY = posY;
     this.metSpeedX = metSize/800; //maybe use something like: constrain(this.y, 0, height - this.r);
     this.metSpeedY = 1;//with this parameter they are falling down 
-    
-    //random(6)-3;
-    
-    //print("This is a Meteorite:" + this.posX +" " + this.posY + " ");
-    
+
    
   }
 
    void show(){
-      image(this.metPicture, this.posX, this.posY, this.metSize*1.5, this.metSize);
-      image(this.metPicture, this.posX+20, this.posY, this.metSize*2, this.metSize);
-      image(this.metPicture, this.posX+200, this.posY, this.metSize*2.5, this.metSize);
-       image(this.metPicture, this.posX-200, this.posY, this.metSize*2.5, this.metSize);
-   }
-   
-   void fall(){
-     //this.metSpeedY = metSpeedY + random(6)-3;
-     //print(" // "+this.metSpeedX);
-     //this.metSpeedY = metSpeedY- (posX/1000);
+      fill(0,63,6);
+      ellipse( this.posX, this.posY, this.metSize*1.5, this.metSize);
+    //ellipse(this.posX+20, this.posY, this.metSize*2, this.metSize);
+    //ellipse(this.posX+200, this.posY, this.metSize*2.5, this.metSize);
+    //ellipse(this.posX-200, this.posY, this.metSize*2.5, this.metSize);
+ }
+   public void fall(){
     this.posX = this.posX + int(metSpeedX);
     this.posY = this.posY + int(metSpeedY);
  
- }
-   
+ }  
+ 
+   boolean checkCollision(Object obj){
+     if (obj instanceof Rocket) {
+      Rocket rocket = (Rocket)obj;
+      float apothem = 10 * tan(60);
+      float distance = dist(this.posX, this.posY, rocket.posX, rocket.posY-apothem);
+      if (distance < this.metSize/2 + apothem + 10) {        
+        return true;
+        }
+      } else if (obj instanceof L1Dino) {
+        L1Dino dino = (L1Dino)obj;
+        float distance = dist(this.posX, this.posY, dino.posX, dino.posY);
+        if (distance < metSize/2+dino.size/2) {
+          return true;
+        }
+     } else if (obj instanceof Bullet) {
+        Bullet bullet = (Bullet)obj;
+        float distance = dist(this.posX, this.posY, bullet.posX, bullet.posY); 
+        if (distance <= metSize/2 + bullet.size/2 ) {        
+          return true;
+        }
+    }
+     
+     return false;
+   }
 }

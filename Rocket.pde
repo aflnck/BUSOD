@@ -1,32 +1,37 @@
 class Rocket extends Things{
-  int Rsize;
-  PImage rocketPicture;
-  int fuel;
-  boolean rocketStartable;
-
-  Rocket(String picture, int RposX, int RposY) {
-      this.rocketPicture = loadImage(picture);
+  boolean isVisible;
+  int speed;
+  
+  Rocket(int RposX, int RposY) {
+      //this.partPicture = loadImage(picture);
       this.posX = RposX;
       this.posY = RposY;
-      fuel = 100000; //lb`s of fuel of a falcon 1.
-      rocketStartable = false;
+      this.speed = 20;
+      //print("This is a Rocketpart:" + this.posX +" " + this.posY + " ");
   }
+  
    void show(){
-      image(this.rocketPicture, this.posX, this.posY, 40, 40);
+    fill(0,65,255);
+    triangle(this.posX + 10, this.posY -17.32, this.posX+3 , this.posY, this.posX+17, this.posY);
+    noFill();
+    //bottom left triangle
+    fill(0,65,255);
+    triangle(this.posX-10, this.posY -17.32, this.posX -17, this.posY, this.posX -3, this.posY);
+    noFill();
+    //top triangle
+    fill(19, 18, 140);
+    triangle(this.posX, this.posY -34.32, this.posX +10, this.posY -18, this.posX-10, this.posY -18);
+    noFill();
+    //riverse bottom triangle
+    fill(255,0,0);
+    triangle(this.posX, this.posY -10.32, this.posX +10, this.posY -18, this.posX-10, this.posY -18);
    }
-   void prepare(){
-     posX = 700;
-     posY = 300;
+   
+   void moveRight() {
+     this.posX+=this.speed;
    }
-   void move(int x, int y){
-     fuel = fuel -1000; //can do 100 steps like this.
-     //if rocket Y relative to starting base, into negative -> crash.
+   
+   void moveLeft() {
+     this.posX-=this.speed;
    }
-//getter / setter methods:
-  int getposX(){
-    return this.posX;
-  }
-  int getposY(){
-    return this.posY;
-  }
 }

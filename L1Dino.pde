@@ -1,17 +1,14 @@
 class L1Dino extends Things{
-
-  //L1Dino[] dinos;
-  //String skill;
   
   private PImage dinoPicture;
   private int colorR;
   private int colorG;
   private int colorB;
   private int generation;
-  private int size;
+  private int sizeX, sizeY;
   
   //constructor!
-  L1Dino(String picture, int DposX, int DposY, int r, int g, int b, int dinoGeneration, int size) {
+  L1Dino(String picture, int DposX, int DposY, int r, int g, int b, int dinoGeneration, int sizeX, int sizeY) {
   //this.age = 0;
   this.dinoPicture = loadImage(picture);
   this.posX = DposX;
@@ -20,7 +17,8 @@ class L1Dino extends Things{
   this.colorG = g; 
   this.colorB = b;
   this.generation = dinoGeneration;
-  this.size = size;
+  this.sizeX = sizeX;
+    this.sizeY = sizeY;
   }
 
   void move(int directionX, int directionY){
@@ -31,12 +29,20 @@ class L1Dino extends Things{
   void jump(){
       this.posY = -35;
 
-      
   }
   
   void show() {
-      image(this.dinoPicture, this.posX, this.posY, 150, 130);
+      image(this.dinoPicture, this.posX, this.posY, sizeX, sizeY);
     }
+    
+    int getSizeX(){
+    return this.sizeX;
+    }
+        int getSizeY(){
+    return this.sizeY;
+    }
+    
+    
   int getColorR(){
     return this.colorR;
   }

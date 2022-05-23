@@ -14,7 +14,7 @@ Playground playground;
 Meteorite met;
 Rocket rocket1;
 Controls con;
-
+Background bg;
 
 void settings() {
   size(800, 600);
@@ -23,6 +23,7 @@ void settings() {
 void setup() {
   playground = new Playground();
   con = new Controls();
+  bg = new Background();
   noStroke();
   
   //add initial objects:
@@ -38,7 +39,7 @@ void draw() {
      return;
    }
    
-  playground.drawB();
+  bg.drawB();
   
   if ((millis() - timer) >= 5000)  {
     timer = millis();

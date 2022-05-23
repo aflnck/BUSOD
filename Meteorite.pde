@@ -4,6 +4,7 @@ int metSize;
 float metSpeedX;
 float metSpeedY; 
 PImage metPicture;
+int destructionY; //at this Y, the meteorite will crash automatically.
 
 //meteorites falling down 
   Meteorite(int metSize, int posX, int posY){
@@ -12,7 +13,7 @@ PImage metPicture;
     this.posY = posY;
     this.metSpeedX = metSize/800; //maybe use something like: constrain(this.y, 0, height - this.r);
     this.metSpeedY = 1;//with this parameter they are falling down 
-
+    this.destructionY = int(random(40))+430;
    
   }
 
@@ -39,8 +40,8 @@ PImage metPicture;
         }
       } else if (obj instanceof L1Dino) {
         L1Dino dino = (L1Dino)obj;
-        float distance = dist(this.posX, this.posY, dino.posX, dino.posY);
-        if (distance < metSize/2+dino.size/2) {
+        float distance = dist(this.posX, this.posY, dino.posX + dino.getSizeX()/2, dino.posY + dino.getSizeY()/1.3);
+        if (distance < metSize/2+dino.sizeX/2) {
           return true;
         }
      } else if (obj instanceof Bullet) {
@@ -52,5 +53,10 @@ PImage metPicture;
     }
      
      return false;
+   }
+   
+   //getters&setters:
+   int getDestructionY(){
+   return destructionY;
    }
 }

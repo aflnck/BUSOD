@@ -1,6 +1,6 @@
 
 //things to check out: textAlign(CENTER);, rectMode(CENTER);
-
+//import processing.sound.*;
 int currentYear = -245; //in million years. timespan until -66 years.
   //Non-bird dinosaurs lived between about 245 and 66 million years ago,  
   //in a time known as the Mesozoic Era. This was many millions of years
@@ -10,6 +10,8 @@ int gameStage = 0;
 
 int timer = 0;
 
+//SoundFile music;
+StartScene startscene;
 Playground playground;
 Meteorite met;
 Rocket rocket1;
@@ -21,6 +23,11 @@ void settings() {
 }
 
 void setup() {
+  startscene=new StartScene();
+  con = new Controls();
+  
+  //music =new SoundFile(this,"sound.mp3");
+ // music.loop();
   playground = new Playground();
   con = new Controls();
   bg = new Background();

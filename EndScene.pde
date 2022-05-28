@@ -11,7 +11,7 @@ class EndScene {
     this.buttonY = height/2 - this.buttonH/2;
   }
 
-  void drawEndScene() {
+  void draw() {
     //OVERLAY
     //fill(#F73939);
     //rect(0, 0, width, height);

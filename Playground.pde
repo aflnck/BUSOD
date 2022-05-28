@@ -84,34 +84,6 @@ class Playground {
       bulletList.get(i).show();
     }
   }
-
-  //check what element of the lists got selected:
-  void checkThingLocation(int mousePosX, int mousePosY) {
-    //check if selected is a Dino & what dino it exactly is:
-    if (dinoList != null) {
-      for (int i=0; i < dinoList.size(); i++) {
-        int dinoX = dinoList.get(i).getPosX();
-        int dinoY = dinoList.get(i).getPosY();
-        if (dinoX < mousePosX && dinoX + 80 > mousePosX && // TODO: extract this function into the things class!
-          dinoY < mousePosY && dinoY + 50 > mousePosY) { // TORESEARCH: colourpicker in mouseLocation to determine
-          //the if dino is clicked or if on background.
-          selectedObject = 0; // 0 is for Dino!
-          selectedObjID = i; // which rocket (in arrayList) is it?
-        }
-      }
-    }
-    //check if selected is a Rocket & what rocket it exactly is: (can only select the last rocket:)
-    if (rocketList != null) {
-      int rocketX = rocketList.get(rocketList.size()-1).getPosX();
-      int rocketY = rocketList.get(rocketList.size()-1).getPosY();
-      if (rocketX < mousePosX && rocketX + 50 > mousePosX &&
-        rocketY < mousePosY && rocketY + 50 > mousePosY) {
-        print("issa Rocket, "+rocketX + " " + rocketY + " ");
-        selectedObject = 1; // 1 is for Rocket!
-        selectedObjID = rocketList.size()-1; // which rocket (in arrayList) is it?
-      }
-    }
-  }
   
   // rocket section
   void moveRight() {
@@ -125,27 +97,6 @@ class Playground {
     }
   }
 
-  void highlightSelectedObj() {
-    if (selectedObject != 10) {
-      int objectX = 0;
-      int objectY = 0;
-      if (selectedObject == 0) { //if its a dino!
-        objectX = dinoList.get(selectedObjID).getPosX();
-        objectY = dinoList.get(selectedObjID).getPosY();
-      } else if (selectedObject == 1) { // if it` a Rocket
-        objectX = rocketList.get(selectedObjID).getPosX();
-        objectY = rocketList.get(selectedObjID).getPosY();
-      }
-      stroke(255, 103, 111);
-      strokeWeight(6);
-      fill(0, 0);
-
-      //TODO if selectedObject == 0){ make it 80x50, else as big as a rocket.}
-      rect(objectX, objectY, 52, 52);
-    }
-  }
- 
-  
   int getClosestDino(Meteorite met) {
       int index = -1;
       float minDist = 10000000;
@@ -170,7 +121,7 @@ class Playground {
       // if met collided rocket, we lose
       if (met.checkCollision(rocket) == true) {
         rocket = null;
-        end = new EndScene();
+        gameStage = 2; //display EndScene
       }
       
       // check collision of bullets and meteorites
@@ -183,7 +134,7 @@ class Playground {
         }
       }
       
-      // check collision of closest dino and meteriots
+      // check collision of closest dino and meteorites
       int dinoIdToDelete = getClosestDino(met);
       if (dinoIdToDelete != -1) {
           int dinoX = dinoList.get(dinoIdToDelete).posX;

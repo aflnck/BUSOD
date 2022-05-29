@@ -14,7 +14,7 @@ PlayerDB(){
 
 
 //--------------------------------------------------------START OF NEW USERINPUT
-int addPlayer(String currentName){
+int addPlayer(String currentName, int playerScore){
     // open database file
   try {
     if ( sqldb.connect() )
@@ -22,8 +22,8 @@ int addPlayer(String currentName){
       try {
         //sqldb.query("DROP TABLE players;");
         sqldb.query("CREATE TABLE IF NOT EXISTS players(run_id INTEGER PRIMARY KEY AUTOINCREMENT, player_name TEXT, score INTEGER);");
-        sqldb.query("INSERT INTO players(player_name, score) VALUES('"+currentName+"', 0);");
-        sqldb.query( "SELECT run_id FROM players ORDER BY run_id DESC LIMIT 1;");
+        sqldb.query("INSERT INTO players(player_name, score) VALUES('"+currentName+"', '"+playerScore+"');");
+        //sqldb.query( "SELECT run_id FROM players ORDER BY run_id DESC LIMIT 1;");
       } catch (Exception e) {
         //Your only way to see whether an UPDATE or INSERT statement worked 
         //is when no exception occurred 
@@ -34,11 +34,11 @@ int addPlayer(String currentName){
   catch (Exception e) {
     e.printStackTrace();
   }
-  run_id = sqldb.getInt("run_id");
+  //run_id = sqldb.getInt("run_id");
   sqldb.close();
   return run_id;
 }
-//END OF NEW USERINPUT
+//--------------------------------------------------------END OF NEW USERINPUT
 //--------------------------------------------------------START OF GET LEADERBOARD DATA
 void fillListsLeaderBoardStats(){
     // open database file
@@ -54,27 +54,21 @@ void fillListsLeaderBoardStats(){
         //Hint: Dependent on the data type (int, String, float, double, etc)
         //there are getXYZ methods available: 
         print(sqldb.getString("run_id") +", ");
-        playerList.add(sqldb.getString("player_name") +", ");
-        playerScoreList.add(sqldb.getInt("score"));        
+        print(sqldb.getString("player_name") +", ");
+        print(sqldb.getInt("score"));     
+      
+      //actually passing on db info.
+        playerList.add(sqldb.getString("player_name"));
+        playerScoreList.add(sqldb.getInt("score")); 
         println();
       }
-      
-      /*sqldb.query( "UPDATE players SET age = age + 1 WHERE name = \"Oak Tree\"");
-      
-      try {
-        sqldb.query( "INSERT INTO players VALUES(\"Oak Tree\", \"Test 1 \", 4, 123)");
-      } catch (Exception e) {
-        //Your only way to see whether an UPDATE or INSERT statement worked 
-        //is when no exception occurred 
-        e.printStackTrace();
-      }*/
     }
   }
   catch (Exception e) {
     e.printStackTrace();
   }
 }
-//END OF GET LEADERBOARD DATA
+//--------------------------------------------------------END OF GET LEADERBOARD DATA
 //--------------------------------------------------------START OF GET LEADERBOARD DATA
 void exampleMethod(){
 

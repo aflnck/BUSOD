@@ -2,6 +2,8 @@ class EndScene {
   String gameOverText;
   int buttonX, buttonY, buttonW, buttonH;
 
+  private ArrayList<String> playerList = new ArrayList<String>();
+  private ArrayList<Integer> playerScoreList = new ArrayList<Integer>();
 
   EndScene() {
     this.gameOverText = "Game Over!";
@@ -23,6 +25,13 @@ class EndScene {
     textSize(60);
     text(this.gameOverText, width/3, height/4);
   
+  for (int i = 0; b < playerList.size(); i++) {
+    text(playerList
+  }
+  
+  void processLists(ArrayList getplayerList, ArrayList getplayerScoreList){
+    playerList = getplayerList;
+    playerScoreList = getplayerScoreList;
   }
 
   boolean mouseOverButton() {

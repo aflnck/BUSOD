@@ -34,6 +34,8 @@ private color c1 = color(100, 100, 100);
 private color textColor = color(255);
 private boolean playerCreated = false;
 
+//Endscene Vars:
+boolean playerListProcessed = false;
 
 void settings() {
   size(800, 600);
@@ -49,10 +51,10 @@ void setup() {
   playground = new Playground();
   con = new Controls();
   bg = new Background();
-  //noStroke(); WHAT DOES THIS DO HERE?
+  noStroke();
   endScene = new EndScene();
   pdb = new PlayerDB();
-  sqldb = new SQLite(this, "data/db.sqlite" );
+  sqldb = new SQLite(this, "test.db" );
 
   //add initial objects to lists, prepare gameplay:
   playground.rocketSetup();
@@ -66,8 +68,8 @@ void setup() {
 void draw() {
   switch(gameStage) { //DEPENDING ON THE GAMESTAGE, DRAW DIFFERENT SCENES.
   case 0:
-    if (addPlayerButton.isPressed() && text1.getText() != null) {
-      pdb.addPlayer(text1.getText());
+    if (addPlayerButton.isPressed() && text1.getText() != null && !playerCreated) { // only executes if button pressed, there is text &
+      pdb.addPlayer(text1.getText(), 0);
       playerCreated = true;
     }
     if (startButton.isPressed() && playerCreated) {
@@ -91,50 +93,56 @@ void draw() {
     }
     break;
   case 2:
-    endScene.draw();
-    break;
-  case 3:
-    //menuScreen.draw(); //We could do a Menu here.
+    
+    if (!playerListProcessed) { // only executes if button pressed, there is text &
+    pdb.fillListsLeaderBoardStats();
+      endScene.processLists(pdb.getplayerList(), pdb.getplayerScoreList());
+      playerListProcessed = true;
+    }
+      endScene.draw();
+      break;
+    case 3:
+      //menuScreen.draw(); //We could do a Menu here.
+    }
   }
-}
 
-void showStartButtons() {
-  cp5 = new ControlP5(this);
-  startFont = createFont("arial", 25);
-  textFont(startFont);
-  
-  text1 = cp5.addTextfield("Choose a username")
-    .setPosition(width/2 - 300, height/2 -50)
-    .setSize(100, 30)
-    .setFont(startFont)
-    .setFocus(true)
-    .setColorCaptionLabel(0)
-    .setColorBackground(color(255))
-    .setColorActive(color(0))
-    .setColor(color(0))
-    .setVisible(true);
+  void showStartButtons() {
+    cp5 = new ControlP5(this);
+    startFont = createFont("arial", 25);
+    textFont(startFont);
 
-  addPlayerButton = cp5.addButton("Add Player")
-    .setPosition(width/2 - 300, height/2 + 20)
-    .setSize(200, 40)
-    .setFont(startFont)
-    .setColorBackground(c1)
-    .setColorForeground(color(255))
-    .setVisible(true);
+    text1 = cp5.addTextfield("Choose a username")
+      .setPosition(width/2 - 300, height/2 -50)
+      .setSize(100, 30)
+      .setFont(startFont)
+      .setFocus(true)
+      .setColorCaptionLabel(0)
+      .setColorBackground(color(255))
+      .setColorActive(color(0))
+      .setColor(color(0))
+      .setVisible(true);
 
-  startButton = cp5.addButton("play")
-    .setPosition(width/2 - 300, height/2 +130)
-    .setSize(100, 50)
-    .setFont(startFont)
-    .setColorBackground(c1)
-    .setColorForeground(color(255))
-    .setVisible(true);
-}
+    addPlayerButton = cp5.addButton("Add Player")
+      .setPosition(width/2 - 300, height/2 + 20)
+      .setSize(200, 40)
+      .setFont(startFont)
+      .setColorBackground(c1)
+      .setColorForeground(color(255))
+      .setVisible(true);
 
-void mousePressed() { //EXECUTE MOUSE OPERATIONS IN CONTROLS CLASS.
-  con.mouseP();
-}
+    startButton = cp5.addButton("play")
+      .setPosition(width/2 - 300, height/2 +130)
+      .setSize(100, 50)
+      .setFont(startFont)
+      .setColorBackground(c1)
+      .setColorForeground(color(255))
+      .setVisible(true);
+  }
 
-void keyPressed() {
-  con.keyP();
-}
+  void mousePressed() { //EXECUTE MOUSE OPERATIONS IN CONTROLS CLASS.
+    con.mouseP();
+  }
+
+  void keyPressed() {
+    con.keyP();
+  }

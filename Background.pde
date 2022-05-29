@@ -24,6 +24,7 @@ public class Background {
   }
 
   void drawB() {
+    //noStroke();
     background(blue); //sky
 
     fill(white); //cloud

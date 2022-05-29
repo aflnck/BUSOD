@@ -74,9 +74,9 @@ class L1Dino extends Things{
        this.changeMovesRight();
      }
 
+     // 1% chance to randomly change directory
      if (random(1) <= 0.01) {
-       this.speedX = 0;
-       this.speedY = 0;
+       this.changeMovesRight();
      }
 
      //set back +35 after 0.2 "gameyears" later..?

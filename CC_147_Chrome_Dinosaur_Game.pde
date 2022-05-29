@@ -24,6 +24,7 @@ Controls con; //for mouse & keyboard control.
 PlayerDB pdb;
 ControlP5 cp5;
 SQLite sqldb;
+int run_id;
 PFont startFont;
 
 //StartScene Vars:
@@ -52,7 +53,7 @@ void setup() {
   //noStroke(); WHAT DOES THIS DO HERE?
   endScene = new EndScene();
   pdb = new PlayerDB();
-  sqldb = new SQLite(this, "data/db.sqlite" );
+  sqldb = new SQLite(this, "data/db.sqlite");
 
   //add initial objects to lists, prepare gameplay:
   playground.rocketSetup();
@@ -67,7 +68,8 @@ void draw() {
   switch(gameStage) { //DEPENDING ON THE GAMESTAGE, DRAW DIFFERENT SCENES.
   case 0:
     if (addPlayerButton.isPressed() && text1.getText() != null) {
-      pdb.addPlayer(text1.getText());
+      this.run_id = pdb.addPlayer(text1.getText());
+      print(this.run_id);
       playerCreated = true;
     }
     if (startButton.isPressed() && playerCreated) {
@@ -93,6 +95,7 @@ void draw() {
     break;
   case 2:
     endScene.draw();
+    pdb.getDBInfo();
     break;
   case 3:
     //menuScreen.draw(); //We could do a Menu here.

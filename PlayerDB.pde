@@ -4,18 +4,14 @@ class PlayerDB{
   
 int currentPlayerID;
 String currentName;
-  
-SQLite sqldb;
-
-// constructor of the sqldb.
-PlayerDB(Object CC_147_Chrome_Dinosaur_Game){
-  //sqldb = new SQLite(CC_147_Chrome_Dinosaur_Game, "data/sqldb.sqlite" );  // THIS MUST BE REPAIRED.
+ 
+PlayerDB(){
+  //currently empty constructor
 }
 
-//PROBLEM IS: CURRENTLY WE ONLY HAVE TABLE "CONTACTS", BUT NOT PLAYERS / USERS.
 
-
-void newUser(int currentPlayerID, String currentName){
+//--------------------------------------------------------START OF NEW USERINPUT
+void addPlayer(String currentName){
     // open database file
   try {
     if ( sqldb.connect() )
@@ -32,9 +28,10 @@ void newUser(int currentPlayerID, String currentName){
   catch (Exception e) {
     e.printStackTrace();
   }
+  sqldb.close();
 }
-
-
+//END OF NEW USERINPUT
+//--------------------------------------------------------START OF GET LEADERBOARD DATA
 void getDBInfo(){
     // open database file
   try {
@@ -75,8 +72,8 @@ void getDBInfo(){
     e.printStackTrace();
   }
 }
-
-
+//END OF GET LEADERBOARD DATA
+//--------------------------------------------------------START OF GET LEADERBOARD DATA
 void exampleMethod(){
 
     // open database file
@@ -118,11 +115,4 @@ void exampleMethod(){
 
 
 
-
-
-void closeConnection(){
-
-    // open database file
-sqldb.close();
-}
 }

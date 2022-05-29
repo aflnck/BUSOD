@@ -15,7 +15,6 @@ class Playground {
       this.bombPicture = loadImage("bomb.png");
   }
 
-
   void createInitialDinos() {
     for (int i = 0; i < 5; i ++) {
       String pictureStorage = "dino"+i+".png";

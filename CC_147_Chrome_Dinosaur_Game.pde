@@ -13,6 +13,7 @@ int currentYear = -245;
 int gameStage = 0;
 int timer = 0;
 private int timeDifficoulty = 6000;
+private int timeDifficoultyLvl2 = 3000;
 
 //SoundFile music;
 StartScene startScene;
@@ -33,14 +34,17 @@ PFont startFont;
 private Textfield textBox;
 private Button startButton;
 private Button addPlayerButton;
-private color c1 = color(100, 100, 100);
-private color textColor = color(255);
+private color c1 = color(250, 218, 94);
+private color textColor = color(0);
 private String playerName;
 
 private boolean playerCreated = false;
 
 //startScene Vars:
 private boolean dbActionEndScene;
+
+//LevelUp Stuff:
+private Button levelUpButton;
 
 void settings() {
   size(800, 600);
@@ -56,7 +60,7 @@ void setup() {
   playground = new Playground();
   con = new Controls();
   bg = new Background();
-  //noStroke(); WHAT DOES THIS DO HERE?
+  noStroke();
   endScene = new EndScene();
   pdb = new PlayerDB();
   sqldb = new SQLite(this, "data/db.sqlite");
@@ -82,6 +86,13 @@ void draw() {
       textBox.setVisible(false);
       startButton.setVisible(false);
       addPlayerButton.setVisible(false);
+      levelUpButton.setVisible(false);
+    } else if (levelUpButton.isPressed() && playerCreated){
+          gameStage = 2;
+      textBox.setVisible(false);
+      startButton.setVisible(false);
+      addPlayerButton.setVisible(false);
+      levelUpButton.setVisible(false);
     }
     break;
   case 1: // Case 1 is the normal gameplay. 
@@ -100,7 +111,23 @@ void draw() {
       print(timeDifficoulty);
     }
     break;
-  case 2:
+      case 2:
+    bg.drawB();
+    playground.showRocket();
+    playground.showBullets();
+    playground.showDinos();
+    playground.showMeteorites();
+    playground.checkCollision();
+    playground.fallMeteorites();
+    playground.moveDinos();
+    if ((millis() - timer) >= timeDifficoultyLvl2) { //it was ((millis() - timer) >= 5000) before!
+      timer = millis();
+      playground.addMeteorite(1);
+      timeDifficoultyLvl2 = timeDifficoultyLvl2 - 56;
+      print(timeDifficoultyLvl2);
+    }
+    break;
+  case 3:
   
     endScene.setPlayerName(playerName);
     
@@ -114,10 +141,7 @@ void draw() {
     }
 
     endScene.draw();
-
     break;
-  case 3:
-    //menuScreen.draw(); //We could do a Menu here.
   }
 }
 
@@ -133,7 +157,7 @@ void showStartButtons() {
     .setFocus(true)
     .setColorCaptionLabel(0)
     .setColorBackground(color(255))
-    .setColorActive(color(0))
+    .setColorActive(color(255))
     .setColor(color(0))
     .setVisible(true);
 
@@ -142,18 +166,33 @@ void showStartButtons() {
     .setSize(200, 40)
     .setFont(startFont)
     .setColorBackground(c1)
-    .setColorForeground(color(255))
+    .setColorForeground(color(100))
+    .setColorActive(color(128))
     .setVisible(true);
 
-  startButton = cp5.addButton("play")
+  startButton = cp5.addButton("Start Lvl 1")
     .setPosition(width/2 - 300, height/2 +130)
-    .setSize(100, 50)
+    .setSize(200, 40)
     .setFont(startFont)
     .setColorBackground(c1)
-    .setColorForeground(color(255))
+    .setColorForeground(color(100))
+    .setColorActive(color(128))
+    .setVisible(true);
+    
+  levelUpButton = cp5.addButton("Start Lvl 2")
+    .setPosition(width/2 + 100, height/2 + 130)
+    .setSize(200, 40)
+    .setFont(startFont)
+    .setColorBackground(c1)
+    .setColorForeground(color(100))
+    .setColorActive(color(128))
     .setVisible(true);
 }
 
+
+void showLevelUpButton() {
+
+}
 void mousePressed() { //EXECUTE MOUSE OPERATIONS IN CONTROLS CLASS.
   con.mouseP();
 }

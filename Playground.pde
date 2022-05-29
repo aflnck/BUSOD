@@ -133,7 +133,7 @@ class Playground {
       // if met collided rocket, we lose
       if (met.checkCollision(rocket) == true) {
         rocket = null;
-        gameStage = 2; //display EndScene
+        gameStage = 3; //display EndScene
       }
       
       // check collision of bullets and meteorites

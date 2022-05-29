@@ -46,7 +46,7 @@ void fillListsLeaderBoardStats(){
     if ( sqldb.connect() )
     {
       print(sqldb.getConnection());
-      sqldb.query( "SELECT * FROM players WHERE score > 0 ORDER BY score DESC" );
+      sqldb.query( "SELECT * FROM players WHERE score > 0 ORDER BY score DESC LIMIT 8" );
       
       //Check if more results (rows) are available. This needs to be called before any results can be retrieved. 
       while (sqldb.next()) 

@@ -19,7 +19,7 @@ PFont lbFont;
     //fill(#F73939);
     //rect(0, 0, width, height);
     //rect(buttonX, buttonY, buttonW, buttonH);
-  fill(127,0,255);
+  fill(100, 149, 237);
   rect(100, 100, 600, 400);
 
     //TEXT

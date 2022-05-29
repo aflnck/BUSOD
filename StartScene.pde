@@ -1,22 +1,50 @@
+import controlP5.*;
 class StartScene {
 
   private PImage startPic;
   private Button startButton;
   private boolean gameStart;
-
-  StartScene() {
-    this.startPic = loadImage("startPic.png");
-    startButton = new Button(width/2 - 50, height/2 -25, 100, 50, "Start");
-        image(startPic, 0, 0);
-    startButton.display();
-  }
-
-  void update() {
-    gameStart = startButton.clicked(mouseX, mouseY);
-  }
+  private PFont font;
+  private Textfield text1;
+  private Button start;
+  private Button addPlayer;
+  private color c1 = color(100,100,100);
+  private color textColor = color(255);
+  private boolean wasAPlayerAdded = false;
+  private int newPlayerID;
+  private String newPlayerName;
   
+  
+  
+  StartScene() {
+
+    this.startPic = loadImage("startPic.png");
+
+        image(startPic, 0, 0);
+
+ 
+
+  // new player button, has to hide when clicked.
+  
+
+     
+     
+     
+  }
+
+//COMMUNICATION BETWEEN MAIN FUNCTION AND THIS; FOR DB_INPUTS.
+  boolean newPlayer() {
+    return wasAPlayerAdded;
+    //if a player is created.
+  }
   boolean checkStartButton(){
     return gameStart;
+  }
+  int getPlayerID(){
+  return newPlayerID;
+  }
+  String getPlayerName(){
+  return newPlayerName;
   }
   
 }

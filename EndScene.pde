@@ -1,6 +1,8 @@
 class EndScene {
   String gameOverText;
   int buttonX, buttonY, buttonW, buttonH;
+private ArrayList<String> playerList = new ArrayList<String>();
+  private ArrayList<Integer> playerScoreList = new ArrayList<Integer>();
 
 
   EndScene() {
@@ -23,7 +25,20 @@ class EndScene {
     textSize(60);
     text(this.gameOverText, width/3, height/4);
   
+  for (int i = 0; i < playerList.size(); i++) { //the leaderboard
+    print(playerList.get(i));
+    print(playerScoreList.get(i));
   }
+  }
+  
+  
+  void processLists(ArrayList<String> getplayerList, ArrayList<Integer> getplayerScoreList){
+    playerList = getplayerList;
+    playerScoreList = getplayerScoreList;
+  }
+
+  
+
 
   boolean mouseOverButton() {
     return (mouseX > buttonX 

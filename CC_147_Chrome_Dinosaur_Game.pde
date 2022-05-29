@@ -27,6 +27,7 @@ SQLite sqldb;
 int run_id;
 PFont startFont;
 
+
 //StartScene Vars:
 private Textfield text1;
 private Button startButton;
@@ -35,6 +36,8 @@ private color c1 = color(100, 100, 100);
 private color textColor = color(255);
 private boolean playerCreated = false;
 
+//startScene Vars:
+private boolean playerListProcessed;
 
 void settings() {
   size(800, 600);
@@ -94,8 +97,14 @@ void draw() {
     }
     break;
   case 2:
+  if (!playerListProcessed) {
+    pdb.fillListsLeaderBoardStats();
+      endScene.processLists(pdb.getplayerList(), pdb.getplayerScoreList());
+      playerListProcessed = true;
+    }
+  
     endScene.draw();
-    pdb.getDBInfo();
+
     break;
   case 3:
     //menuScreen.draw(); //We could do a Menu here.

@@ -4,7 +4,10 @@ class PlayerDB{
   
 int currentPlayerID;
 String currentName;
- 
+
+  private ArrayList<String> playerList = new ArrayList<String>();
+  private ArrayList<Integer> playerScoreList = new ArrayList<Integer>();
+
 PlayerDB(){
   //currently empty constructor
 }
@@ -37,13 +40,13 @@ int addPlayer(String currentName){
 }
 //END OF NEW USERINPUT
 //--------------------------------------------------------START OF GET LEADERBOARD DATA
-void getDBInfo(){
+void fillListsLeaderBoardStats(){
     // open database file
   try {
     if ( sqldb.connect() )
     {
       print(sqldb.getConnection());
-      sqldb.query( "SELECT * FROM players" );
+      sqldb.query( "SELECT * FROM players WHERE score > 0 ORDER BY score DESC" );
       
       //Check if more results (rows) are available. This needs to be called before any results can be retrieved. 
       while (sqldb.next()) 
@@ -51,8 +54,8 @@ void getDBInfo(){
         //Hint: Dependent on the data type (int, String, float, double, etc)
         //there are getXYZ methods available: 
         print(sqldb.getString("run_id") +", ");
-        print(sqldb.getString("player_name") +", ");
-        print(sqldb.getInt("score"));        
+        playerList.add(sqldb.getString("player_name") +", ");
+        playerScoreList.add(sqldb.getInt("score"));        
         println();
       }
       
@@ -110,6 +113,14 @@ void exampleMethod(){
   catch (Exception e) {
     e.printStackTrace();
   }
+}
+
+//gettsers & setters:
+ArrayList<String> getplayerList(){
+  return playerList;
+}
+ArrayList<Integer> getplayerScoreList(){
+  return playerScoreList;
 }
 
 

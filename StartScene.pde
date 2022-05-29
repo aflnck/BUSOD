@@ -32,19 +32,7 @@ class StartScene {
      
   }
 
-//COMMUNICATION BETWEEN MAIN FUNCTION AND THIS; FOR DB_INPUTS.
-  boolean newPlayer() {
-    return wasAPlayerAdded;
-    //if a player is created.
-  }
-  boolean checkStartButton(){
-    return gameStart;
-  }
-  int getPlayerID(){
-  return newPlayerID;
-  }
-  String getPlayerName(){
-  return newPlayerName;
-  }
+//COMMUNICATION BETWEEN MAIN FUNCTION AND THIS; FOR DB_INPUTS. //isnt needed anymore?
+
   
 }

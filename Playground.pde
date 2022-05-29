@@ -36,6 +36,14 @@ class Playground {
       }
     }
   }
+  
+  void moveDinos() {
+    if (dinoList != null) {
+      for (int i = 0; i < dinoList.size(); i++) {
+        dinoList.get(i).moveRandomly();
+      }
+    }
+  }
 
   // section Rocket
   void rocketSetup() {

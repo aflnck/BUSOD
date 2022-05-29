@@ -6,6 +6,9 @@ class L1Dino extends Things{
   private int colorB;
   private int generation;
   private int sizeX, sizeY;
+  private int speedX, speedY, cyclesFromDC;
+  private boolean movesRight;
+
   
   //constructor!
   L1Dino(String picture, int DposX, int DposY, int r, int g, int b, int dinoGeneration, int sizeX, int sizeY) {
@@ -17,8 +20,9 @@ class L1Dino extends Things{
   this.colorG = g; 
   this.colorB = b;
   this.generation = dinoGeneration;
+  this.movesRight = false;
   this.sizeX = sizeX;
-    this.sizeY = sizeY;
+  this.sizeY = sizeY;
   }
 
   void move(int directionX, int directionY){
@@ -28,7 +32,14 @@ class L1Dino extends Things{
   
   void jump(){
       this.posY = -35;
-
+  }
+  
+  void changeMovesRight() {
+    if (this.movesRight) {
+      this.movesRight = false;
+    } else {
+      this.movesRight = true;
+    }
   }
   
   void show() {
@@ -53,4 +64,27 @@ class L1Dino extends Things{
     return this.colorB;
   }
 
+  //START RANDOM MOVING OPERATIONS!!
+   void moveRandomly() {
+     this.speedX = int(random(3));
+     if (this.posX >= 700) {
+       this.changeMovesRight();
+     }
+     if (this.posX <= 40) {
+       this.changeMovesRight();
+     }
+
+     if (random(1) <= 0.01) {
+       this.speedX = 0;
+       this.speedY = 0;
+     }
+
+     //set back +35 after 0.2 "gameyears" later..?
+     if (this.movesRight) {
+       this.posX = this.posX - this.speedX; //updating actual location.
+     } else {
+       this.posX = this.posX + this.speedX; //updating actual location.
+     }
+   }
+   //END RANDOM MOVING OPERATIONS !!
 }

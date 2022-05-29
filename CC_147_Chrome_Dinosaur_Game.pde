@@ -85,6 +85,7 @@ void draw() {
     playground.showMeteorites();
     playground.checkCollision();
     playground.fallMeteorites();
+    playground.moveDinos();
     if ((millis() - timer) >= 5000) {
       timer = millis();
       playground.addMeteorite(1);

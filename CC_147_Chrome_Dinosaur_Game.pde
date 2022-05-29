@@ -12,6 +12,7 @@ import controlP5.*;
 int currentYear = -245;
 int gameStage = 0;
 int timer = 0;
+private int timeDifficoulty = 6000;
 
 //SoundFile music;
 StartScene startScene;
@@ -29,15 +30,17 @@ PFont startFont;
 
 
 //StartScene Vars:
-private Textfield text1;
+private Textfield textBox;
 private Button startButton;
 private Button addPlayerButton;
 private color c1 = color(100, 100, 100);
 private color textColor = color(255);
+private String playerName;
+
 private boolean playerCreated = false;
 
 //startScene Vars:
-private boolean playerListProcessed;
+private boolean dbActionEndScene;
 
 void settings() {
   size(800, 600);
@@ -70,19 +73,18 @@ void setup() {
 void draw() {
   switch(gameStage) { //DEPENDING ON THE GAMESTAGE, DRAW DIFFERENT SCENES.
   case 0:
-    if (addPlayerButton.isPressed() && text1.getText() != null) {
-      this.run_id = pdb.addPlayer(text1.getText());
-      print(this.run_id);
+    if (addPlayerButton.isPressed() && textBox.getText() != null && !playerCreated) {
+        playerName = textBox.getText();
       playerCreated = true;
     }
     if (startButton.isPressed() && playerCreated) {
       gameStage = 1;
-      text1.setVisible(false);
+      textBox.setVisible(false);
       startButton.setVisible(false);
       addPlayerButton.setVisible(false);
     }
     break;
-  case 1: // Case 1 is the normal gameplay.
+  case 1: // Case 1 is the normal gameplay. 
     bg.drawB();
     playground.showRocket();
     playground.showBullets();
@@ -91,18 +93,26 @@ void draw() {
     playground.checkCollision();
     playground.fallMeteorites();
     playground.moveDinos();
-    if ((millis() - timer) >= 5000) {
+    if ((millis() - timer) >= timeDifficoulty) { //it was ((millis() - timer) >= 5000) before!
       timer = millis();
       playground.addMeteorite(1);
+      timeDifficoulty = timeDifficoulty - 56;
+      print(timeDifficoulty);
     }
     break;
   case 2:
-  if (!playerListProcessed) {
-    pdb.fillListsLeaderBoardStats();
-      endScene.processLists(pdb.getplayerList(), pdb.getplayerScoreList());
-      playerListProcessed = true;
-    }
   
+    endScene.setPlayerName(playerName);
+    
+    //print(this.run_id);
+    
+    if (!dbActionEndScene) {
+      this.run_id = pdb.addPlayer(playerName, playground.getPlayerScore());
+      pdb.fillListsLeaderBoardStats();
+      endScene.processLists(pdb.getplayerList(), pdb.getplayerScoreList());
+      dbActionEndScene = true;
+    }
+
     endScene.draw();
 
     break;
@@ -115,8 +125,8 @@ void showStartButtons() {
   cp5 = new ControlP5(this);
   startFont = createFont("arial", 25);
   textFont(startFont);
-  
-  text1 = cp5.addTextfield("Choose a username")
+
+  textBox = cp5.addTextfield("Choose a username")
     .setPosition(width/2 - 300, height/2 -50)
     .setSize(100, 30)
     .setFont(startFont)

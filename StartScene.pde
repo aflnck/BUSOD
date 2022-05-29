@@ -5,7 +5,7 @@ class StartScene {
   private Button startButton;
   private boolean gameStart;
   private PFont font;
-  private Textfield text1;
+  private Textfield textBox;
   private Button start;
   private Button addPlayer;
   private color c1 = color(100,100,100);

@@ -5,6 +5,7 @@ class Playground {
   public ArrayList<L1Dino> dinoList = new ArrayList<L1Dino>();
   public ArrayList<Bullet> bulletList = new ArrayList<Bullet>();
   EndScene end;
+  private float playerScore = 100;
 
   PImage bombPicture;
   int selectedObject = 10; // -> selectedObject: 0 is for Dino, 1 is for Rocket.
@@ -103,6 +104,10 @@ class Playground {
         rocket.moveLeft();
     }
   }
+  
+  int getPlayerScore(){
+  return int(playerScore);
+  }
 
   int getClosestDino(Meteorite met) {
       int index = -1;
@@ -137,6 +142,8 @@ class Playground {
         if (met.checkCollision(bullet) == true) {
           meteoriteList.remove(met);
           bulletList.remove(bullet);
+          playerScore = playerScore + 9;
+          print (playerScore);
           i++; // skip current met at index i
         }
       }
@@ -146,6 +153,7 @@ class Playground {
       if (dinoIdToDelete != -1) {
           int dinoX = dinoList.get(dinoIdToDelete).posX;
           int dinoY = dinoList.get(dinoIdToDelete).posY;
+          playerScore = int(playerScore * 0.7); // if the dino dies, the playerscore is getting punched.
           dinoList.remove(dinoIdToDelete);
           meteoriteList.remove(i);
           image(this.bombPicture, dinoX, dinoY, 150, 130);
